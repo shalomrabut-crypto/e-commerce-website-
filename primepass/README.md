@@ -4,7 +4,7 @@
 
 Prime Pass is a ticketing site for verified events in Kenya, built as a solo e-commerce assignment. Attendees buy tickets, organizers sell them, and an admin approves organizers and events.
 
-**Live URL:** not deployed yet
+**Live URL:** e-commerce-website-brown-xi.vercel.app
 
 ## Setup
 
@@ -15,7 +15,7 @@ npm install
 npm run dev
 ```
 
-Then open http://localhost:3000.
+Then open e-commerce-website-brown-xi.vercel.app
 
 For a production build: `npm run build`, then `npm start`.
 
