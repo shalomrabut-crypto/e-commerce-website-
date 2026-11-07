@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Prime Pass create account</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&amp;family=Manrope:wght@400;500;700;800&amp;family=DM+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0E0B10}
+a{color:#FF6A1A}a:hover{color:#FF8A47}
+.enter{animation:rise 200ms ease-out both}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.pill{transition:left 180ms ease-out}
+.cta:hover{background:#FF8A47 !important}
+.fld{height:52px;padding:0 18px;border-radius:12px;border:1.5px solid #3A3040;background:#0E0B10;color:#F3EDE4;font:500 16px Manrope,sans-serif;width:100%;box-sizing:border-box;outline-color:#FF6A1A}
+.fld.bad{border-color:#FF6A1A}
+.s1{animation:float1 6s ease-in-out infinite alternate}
+.s2{animation:float2 7s ease-in-out infinite alternate}
+@keyframes float1{from{transform:rotate(-8deg) translateY(0)}to{transform:rotate(-5deg) translateY(-8px)}}
+@keyframes float2{from{transform:rotate(6deg) translateY(0)}to{transform:rotate(9deg) translateY(6px)}}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
+</style>
+</helmet>
+<div style="min-height: 100%; background: #0E0B10; color: #F3EDE4; font-family: Manrope, sans-serif; display: flex; flex-wrap: wrap">
+
+<div style="flex: 1 1 360px; min-height: 220px; background: #4B1D5C; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(24px, 4vw, 48px); box-sizing: border-box">
+<div aria-hidden="true" style="position: absolute; right: 8%; top: 12%; width: 220px">
+<div class="s2" style="background: #FF6A1A; height: 120px; border-radius: 6px; position: absolute; top: 40px; left: 30px; width: 200px"></div>
+<div class="s1" style="background: #F3EDE4; color: #0E0B10; height: 130px; border-radius: 6px; position: relative; width: 210px; padding: 16px; box-sizing: border-box">
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 11px; color: #6B5F55">ADMIT ONE · No. 0001</p>
+<p style="margin: 6px 0 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: 20px; line-height: 1.1">PRIME PASS</p>
+<div style="position: absolute; left: 10px; right: 10px; bottom: 30px; border-bottom: 2px dashed #B9AC9C"></div>
+</div>
+</div>
+<h1 style="position: relative; margin: 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(30px, 4.6vw, 50px); line-height: 1.05; text-transform: uppercase">One account.<br><span style="color: #FF6A1A">Every gate.</span></h1>
+</div>
+
+<div style="flex: 999 1 420px; min-width: 0; display: flex; justify-content: center; padding: clamp(24px, 5vw, 64px) clamp(16px, 4vw, 56px); box-sizing: border-box">
+<form style="width: 100%; max-width: 440px; display: flex; flex-direction: column; gap: 18px">
+<div>
+<h2 style="margin: 0; font-size: 28px; font-weight: 700">Create your account</h2>
+<p style="margin: 6px 0 0; color: #B8AFA6">Already have one? <a href="Main.dc.html">Sign in</a></p>
+</div>
+
+<div style="position: relative; display: flex; background: #17121A; border: 1px solid #2A2230; border-radius: 999px; padding: 4px">
+<div class="pill" style="position: absolute; top: 4px; bottom: 4px; width: calc(50% - 4px); left: {{ pillLeft }}; background: #FF6A1A; border-radius: 999px"></div>
+<button type="button" onClick="{{ pickAttend }}" aria-pressed="{{ isAttend }}" style="position: relative; flex: 1; min-height: 48px; border: 0; background: transparent; color: {{ attendColor }}; font: 700 15px Manrope, sans-serif; cursor: pointer">I'm attending</button>
+<button type="button" onClick="{{ pickOrg }}" aria-pressed="{{ isOrg }}" style="position: relative; flex: 1; min-height: 48px; border: 0; background: transparent; color: {{ orgColor }}; font: 700 15px Manrope, sans-serif; cursor: pointer">I'm organizing</button>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="name" style="font-size: 14px; font-weight: 700">Full name</label>
+<input id="name" class="fld" autocomplete="name">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="email" style="font-size: 14px; font-weight: 700">Email</label>
+<input id="email" type="email" autocomplete="email" class="{{ emailClass }}" onInput="{{ onEmail }}" aria-describedby="emailErr">
+<sc-if value="{{ emailError }}" hint-placeholder-val="{{ false }}"><p id="emailErr" class="enter" style="margin: 0; font-size: 13px; color: #FFB48A">Enter an email so we can send your tickets.</p></sc-if>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="tel" style="font-size: 14px; font-weight: 700">Phone (for M-Pesa)</label>
+<input id="tel" type="tel" autocomplete="tel" value="+254 " class="fld" style="font-family: 'DM Mono', monospace">
+</div>
+
+<sc-if value="{{ isOrg }}" hint-placeholder-val="{{ false }}">
+<div class="enter" style="display: flex; flex-direction: column; gap: 6px">
+<label for="org" style="font-size: 14px; font-weight: 700">Organization or club name</label>
+<input id="org" class="fld">
+<p style="margin: 0; font-size: 13px; color: #B8AFA6">We check every organizer before their first event goes live.</p>
+</div>
+</sc-if>
+
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="pw" style="font-size: 14px; font-weight: 700">Password</label>
+<div style="position: relative">
+<input id="pw" type="{{ pwType }}" autocomplete="new-password" class="fld" style="padding-right: 76px">
+<button type="button" onClick="{{ togglePw }}" style="position: absolute; right: 4px; top: 4px; height: 44px; min-width: 64px; border: 0; background: transparent; color: #FFB48A; font: 700 14px Manrope, sans-serif; cursor: pointer">{{ pwLabel }}</button>
+</div>
+</div>
+
+<button type="button" class="cta" onClick="{{ submit }}" style="min-height: 56px; border: 0; border-radius: 999px; background: #FF6A1A; color: #0E0B10; font: 700 17px Manrope, sans-serif; cursor: pointer; margin-top: 4px">{{ submitLabel }}</button>
+</form>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1040,"height":760}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { role: 'attend', showPw: false, tried: false, email: '' };
+}
+renderVals() {
+var s = this.state, self = this, attend = s.role === 'attend';
+var bad = s.tried && !s.email.trim();
+return {
+isAttend: attend,
+isOrg: !attend,
+pillLeft: attend ? '4px' : '50%',
+attendColor: attend ? '#0E0B10' : '#F3EDE4',
+orgColor: attend ? '#F3EDE4' : '#0E0B10',
+pwType: s.showPw ? 'text' : 'password',
+pwLabel: s.showPw ? 'Hide' : 'Show',
+emailError: bad,
+emailClass: bad ? 'fld bad' : 'fld',
+submitLabel: attend ? 'Create account' : 'Apply as organizer',
+pickAttend: function () { self.setState({ role: 'attend' }); },
+pickOrg: function () { self.setState({ role: 'org' }); },
+togglePw: function () { self.setState({ showPw: !self.state.showPw }); },
+onEmail: function (e) { self.setState({ email: e.target.value }); },
+submit: function () { self.setState({ tried: true }); }
+};
+}
+}
+</script>
+</body>
+</html>

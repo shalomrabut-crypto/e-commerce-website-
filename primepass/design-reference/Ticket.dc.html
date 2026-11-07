@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Prime Pass ticket</title>
+<script src="./support.js"></script>
+<script src="./ppqr.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&amp;family=Manrope:wght@400;500;700;800&amp;family=DM+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0E0B10}
+a{color:#FF6A1A}a:hover{color:#FF8A47}
+.tA{animation:inA 380ms cubic-bezier(.3,1.5,.5,1) both}
+.tB{animation:inB 380ms cubic-bezier(.3,1.5,.5,1) both}
+@keyframes inA{from{opacity:0;transform:translateY(16px) scale(.97) rotate(-1.5deg)}to{opacity:1;transform:none}}
+@keyframes inB{from{opacity:0;transform:translateY(16px) scale(.97) rotate(1.5deg)}to{opacity:1;transform:none}}
+.cta:hover{background:#FF8A47 !important}
+.ghost:hover{background:#F3EDE4 !important;color:#0E0B10 !important}
+@media print{.noprint{display:none !important}body,.sheet{background:#fff !important}}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
+</style>
+</helmet>
+<div class="sheet" style="width: 980px; height: 800px; box-sizing: border-box; padding: 40px 56px; background: #0E0B10; color: #F3EDE4; font-family: Manrope, sans-serif; display: flex; flex-direction: column; gap: 28px">
+
+<div class="noprint" style="display: flex; align-items: center; justify-content: space-between">
+<div>
+<a href="Main.dc.html" style="font-weight: 800; text-decoration: none">← Prime Pass</a>
+<h1 style="margin: 8px 0 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: 34px; text-transform: uppercase">Your ticket</h1>
+</div>
+<span style="font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 1px; border: 1.5px dashed #FFB48A; color: #FFB48A; padding: 8px 14px; border-radius: 999px">DEMO · SAMPLE EVENT</span>
+</div>
+
+<div class="{{ animClass }}" style="display: flex; width: 868px; height: 340px; border-radius: 18px; overflow: hidden; background: #F3EDE4; color: #0E0B10; box-shadow: 0 30px 60px rgba(0,0,0,.5)">
+<div style="flex: 0 0 190px; position: relative; background: #0E0B10">
+<img src="../public/images/ed-crowd.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: 45% 60%; display: block; filter: grayscale(1) contrast(1.1)">
+<div style="position: absolute; left: 0; right: 0; bottom: 0; height: 10px; background: #FF6A1A"></div>
+</div>
+<div style="flex: 1; padding: 26px 30px; display: flex; flex-direction: column; justify-content: space-between; min-width: 0">
+<div>
+<div style="display: flex; justify-content: space-between; align-items: center">
+<span style="font-family: Unbounded, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.5px">PRIME PASS</span>
+<span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #6B5F55">ADMIT ONE</span>
+</div>
+<h2 style="margin: 14px 0 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: 40px; line-height: 1; text-transform: uppercase">Ed Sheeran</h2>
+<p style="margin: 6px 0 0; font-weight: 700; color: #4A4038">Live at Uhuru Park</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 18px">
+<div><p style="margin: 0; font-size: 11px; font-weight: 800; color: #6B5F55; letter-spacing: 1px">DATE</p><p style="margin: 2px 0 0; font-weight: 700">Sat 14 Nov 2026</p></div>
+<div><p style="margin: 0; font-size: 11px; font-weight: 800; color: #6B5F55; letter-spacing: 1px">GATES OPEN</p><p style="margin: 2px 0 0; font-weight: 700">4:00 PM</p></div>
+<div><p style="margin: 0; font-size: 11px; font-weight: 800; color: #6B5F55; letter-spacing: 1px">TIER</p><p style="margin: 2px 0 0; font-weight: 700">{{ tierLabel }}</p></div>
+<div><p style="margin: 0; font-size: 11px; font-weight: 800; color: #6B5F55; letter-spacing: 1px">VENUE</p><p style="margin: 2px 0 0; font-weight: 700">Uhuru Park, Nairobi</p></div>
+<div><p style="margin: 0; font-size: 11px; font-weight: 800; color: #6B5F55; letter-spacing: 1px">HOLDER</p><p style="margin: 2px 0 0; font-weight: 700">Achieng Otieno</p></div>
+<div><p style="margin: 0; font-size: 11px; font-weight: 800; color: #6B5F55; letter-spacing: 1px">PAID</p><p style="margin: 2px 0 0; font-family: 'DM Mono', monospace">{{ priceLabel }}</p></div>
+</div>
+</div>
+<div style="position: relative; width: 0; border-left: 2px dashed #B9AC9C; margin: 22px 0">
+<div style="position: absolute; left: -15px; top: -36px; width: 28px; height: 28px; border-radius: 50%; background: #0E0B10"></div>
+<div style="position: absolute; left: -15px; bottom: -36px; width: 28px; height: 28px; border-radius: 50%; background: #0E0B10"></div>
+</div>
+<div style="flex: 0 0 236px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 20px">
+<div role="img" aria-label="{{ qrAria }}" style="display: grid; grid-template-columns: {{ qrCols }}; background: #FFFFFF; padding: 12px; border-radius: 8px">
+<sc-for list="{{ cells }}" as="c" hint-placeholder-count="841"><div style="width: 6px; height: 6px; background: {{ c.bg }}"></div></sc-for>
+</div>
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 16px; letter-spacing: 1px">{{ ticketId }}</p>
+<p style="margin: 0; font-size: 12px; font-weight: 700; color: #6B5F55">Scan at gate · single entry</p>
+</div>
+</div>
+
+<div class="noprint" style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center">
+<button type="button" class="cta" onClick="{{ print }}" style="height: 52px; padding: 0 28px; border: 0; border-radius: 999px; background: #FF6A1A; color: #0E0B10; font: 800 16px Manrope, sans-serif; cursor: pointer">Print ticket</button>
+<button type="button" class="ghost" onClick="{{ reissue }}" style="height: 52px; padding: 0 24px; border: 1.5px solid #F3EDE4; border-radius: 999px; background: transparent; color: #F3EDE4; font: 800 15px Manrope, sans-serif; cursor: pointer">Issue another ticket</button>
+<button type="button" class="ghost" onClick="{{ toggleTier }}" style="height: 52px; padding: 0 24px; border: 1.5px solid #F3EDE4; border-radius: 999px; background: transparent; color: #F3EDE4; font: 800 15px Manrope, sans-serif; cursor: pointer">Switch to {{ otherTier }}</button>
+</div>
+<div class="noprint" style="background: #17121A; border: 1px solid #2A2230; border-radius: 12px; padding: 16px 20px; max-width: 868px; box-sizing: border-box">
+<p style="margin: 0; font-size: 13px; font-weight: 800; color: #B8AFA6; letter-spacing: 1px">THIS QR CODE ENCODES</p>
+<p style="margin: 6px 0 0; font-family: 'DM Mono', monospace; font-size: 15px; color: #FFB48A; word-break: break-all">{{ payload }}</p>
+<p style="margin: 6px 0 0; font-size: 13px; color: #B8AFA6">Every ticket gets its own ID, so every QR is different. Scan it with your phone camera to check.</p>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":980,"height":800}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { id: this.newId(), tier: 'REGULAR', flip: false };
+}
+newId() {
+var a = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789', s = '';
+for (var i = 0; i < 6; i++) s += a.charAt(Math.floor(Math.random() * a.length));
+return 'PP-' + s;
+}
+componentDidMount() { if (!this._grid) this.forceUpdate(); }
+grid(text) {
+if (this._key === text && this._grid) return this._grid;
+if (typeof window.PPQR !== 'function') return null;
+var g = window.PPQR(text), cells = [];
+for (var r = 0; r < g.length; r++) for (var c = 0; c < g.length; c++) cells.push({ bg: g[r][c] ? '#0E0B10' : '#FFFFFF' });
+this._key = text; this._grid = { n: g.length, cells: cells };
+return this._grid;
+}
+renderVals() {
+var s = this.state, self = this;
+var payload = 'PRIMEPASS|' + s.id + '|EVT-0101|' + s.tier;
+var g = this.grid(payload) || { n: 29, cells: [] };
+var vip = s.tier === 'VIP';
+return {
+ticketId: s.id,
+payload: payload,
+cells: g.cells,
+qrCols: 'repeat(' + g.n + ', 6px)',
+qrAria: 'QR code for ticket ' + s.id,
+tierLabel: vip ? 'VIP' : 'Regular',
+otherTier: vip ? 'Regular' : 'VIP',
+priceLabel: vip ? 'KES 12,000' : 'KES 4,500',
+animClass: s.flip ? 'tB' : 'tA',
+print: function () { window.print(); },
+reissue: function () { self.setState({ id: self.newId(), flip: !self.state.flip }); },
+toggleTier: function () { self.setState({ tier: self.state.tier === 'VIP' ? 'REGULAR' : 'VIP', id: self.newId(), flip: !self.state.flip }); }
+};
+}
+}
+</script>
+</body>
+</html>

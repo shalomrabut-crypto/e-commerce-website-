@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Prime Pass home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&amp;family=Manrope:wght@400;500;700;800&amp;family=DM+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0E0B10}
+a{color:#FF6A1A}a:hover{color:#FF8A47}
+.tab{position:relative;color:#F3EDE4;text-decoration:none;font-weight:800;font-size:16px;padding:10px 2px;transition:color 160ms ease-out}
+.tab::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:3px;border-radius:2px;background:#FF6A1A;transform:scaleX(0);transform-origin:left;transition:transform 240ms cubic-bezier(.3,1.4,.5,1)}
+.tab:hover{color:#FFB48A}
+.tab:hover::after{transform:scaleX(.45)}
+.tab.on{color:#FF6A1A}
+.tab.on::after{transform:scaleX(1)}
+.slideWrap{position:absolute;inset:0;animation:zoom 7s ease-in-out infinite alternate}
+.slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sA{animation:fadeA 14s ease-in-out infinite}
+.sB{animation:fadeB 14s ease-in-out infinite}
+.dA{animation:dotA 14s ease-in-out infinite}
+.dB{animation:dotB 14s ease-in-out infinite}
+@keyframes fadeA{0%,42%{opacity:1}50%,92%{opacity:0}100%{opacity:1}}
+@keyframes fadeB{0%,42%{opacity:0}50%,92%{opacity:1}100%{opacity:0}}
+@keyframes dotA{0%,42%{background:#FF6A1A;width:36px}50%,92%{background:#6B5F55;width:14px}100%{background:#FF6A1A;width:36px}}
+@keyframes dotB{0%,42%{background:#6B5F55;width:14px}50%,92%{background:#FF6A1A;width:36px}100%{background:#6B5F55;width:14px}}
+@keyframes zoom{from{transform:scale(1)}to{transform:scale(1.07)}}
+.stub{transition:transform 650ms cubic-bezier(.3,1.9,.45,1),box-shadow 500ms ease-out;box-shadow:0 0 0 rgba(0,0,0,0)}
+.stub:hover{transform:translateY(-12px) scale(1.035) rotate(-0.8deg);box-shadow:0 28px 48px rgba(0,0,0,.55),0 0 0 2px #FF6A1A;transition:transform 220ms ease-out,box-shadow 220ms ease-out}
+.stub .pic{transition:transform 700ms ease-out}
+.stub:hover .pic{transform:scale(1.06)}
+.cta:hover{background:#FF8A47 !important}
+.ghost:hover{background:#F3EDE4 !important;color:#0E0B10 !important}
+.track{display:flex;width:max-content;animation:tape 36s linear infinite}
+@keyframes tape{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}.sB{opacity:0}}
+</style>
+</helmet>
+<div style="font-family: Manrope, sans-serif; color: #F3EDE4; background: #0E0B10; min-height: 100%">
+
+<header style="position: sticky; top: 0; z-index: 5; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; padding: 16px clamp(16px, 4vw, 56px); background: rgba(14,11,16,0.92); border-bottom: 1px solid #2A2230">
+<a href="#top" style="display: flex; align-items: center; gap: 10px; color: #F3EDE4; text-decoration: none">
+<div style="width: 30px; height: 22px; background: #FF6A1A; border-radius: 4px; position: relative"><div style="position: absolute; left: 50%; top: -2px; width: 9px; height: 9px; margin-left: -4.5px; border-radius: 50%; background: #0E0B10"></div><div style="position: absolute; left: 50%; bottom: -2px; width: 9px; height: 9px; margin-left: -4.5px; border-radius: 50%; background: #0E0B10"></div></div>
+<span style="font-family: Unbounded, sans-serif; font-weight: 800; font-size: 19px; letter-spacing: 0.5px">PRIME PASS</span>
+</a>
+<nav style="display: flex; flex-wrap: wrap; gap: 28px; align-items: center">
+<a href="#events" class="{{ evClass }}" onClick="{{ goEvents }}">Events</a>
+<a href="#organizers" class="{{ orgClass }}" onClick="{{ goOrg }}">For organizers</a>
+<a href="Signup.dc.html" class="ghost" style="color: #F3EDE4; text-decoration: none; border: 1.5px solid #F3EDE4; padding: 10px 20px; border-radius: 999px; font-weight: 800; font-size: 15px">Sign in</a>
+</nav>
+</header>
+
+<section id="top" style="position: relative; overflow: hidden; min-height: 700px; padding: clamp(72px, 10vw, 140px) clamp(16px, 4vw, 56px) 96px; box-sizing: border-box">
+<div aria-hidden="true" style="position: absolute; inset: 0">
+<div class="slideWrap">
+<img class="slide sA" src="../public/images/hero-orange.jpg" alt="" style="object-position: 50% 70%">
+<img class="slide sB" src="../public/images/hero-hearts.jpg" alt="" style="object-position: 50% 40%">
+</div>
+<div style="position: absolute; inset: 0; background: rgba(14,11,16,0.52)"></div>
+<div style="position: absolute; left: 0; top: 0; bottom: 0; width: min(62%, 760px); background: rgba(14,11,16,0.35)"></div>
+</div>
+<div style="position: relative; max-width: 1180px; margin: 0 auto">
+<p style="margin: 0 0 20px; font-family: 'DM Mono', monospace; font-size: 14px; color: #FFB48A; letter-spacing: 2px">ADMIT ONE · VERIFIED EVENTS ONLY</p>
+<h1 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(42px, 7vw, 100px); line-height: 1.02; letter-spacing: -1px; text-transform: uppercase; max-width: 900px">Your night<br>starts at<br>the <span style="color: #FF6A1A">gate.</span></h1>
+<p style="margin: 28px 0 0; max-width: 500px; font-size: 18px; line-height: 1.6; color: #E4DCD2">Concerts, matches and shows across Kenya. Every organizer checked by us, every ticket a QR code on your phone.</p>
+<form style="margin: 36px 0 0; display: flex; flex-wrap: wrap; max-width: 660px; background: #F3EDE4; border-radius: 999px; overflow: hidden; padding: 6px">
+<label for="q" style="position: absolute; left: -9999px">Search events</label>
+<input id="q" placeholder="Search artists, venues or towns" style="flex: 1 1 240px; min-width: 0; border: 0; padding: 0 20px; height: 52px; font: 600 16px Manrope, sans-serif; color: #0E0B10; background: transparent; outline-color: #FF6A1A">
+<button type="button" class="cta" style="flex: 0 0 auto; height: 52px; padding: 0 28px; border: 0; border-radius: 999px; background: #FF6A1A; color: #0E0B10; font: 800 16px Manrope, sans-serif; cursor: pointer">Find tickets</button>
+</form>
+</div>
+<div aria-hidden="true" style="position: absolute; right: clamp(16px, 4vw, 56px); bottom: 32px; display: flex; gap: 8px">
+<div class="dA" style="height: 6px; width: 36px; border-radius: 3px; background: #FF6A1A"></div>
+<div class="dB" style="height: 6px; width: 14px; border-radius: 3px; background: #6B5F55"></div>
+</div>
+</section>
+
+<div aria-hidden="true" style="background: #FF6A1A; color: #0E0B10; overflow: hidden; padding: 13px 0; font-family: 'DM Mono', monospace; font-size: 14px; letter-spacing: 1px; white-space: nowrap">
+<div class="track">
+<span style="padding-right: 48px">SAT 14 NOV · ED SHEERAN · UHURU PARK, NAIROBI ★ COMING SOON · CHRIS BROWN · TALANTA STADIUM ★ VERIFIED ORGANIZERS ONLY ★ </span>
+<span style="padding-right: 48px">SAT 14 NOV · ED SHEERAN · UHURU PARK, NAIROBI ★ COMING SOON · CHRIS BROWN · TALANTA STADIUM ★ VERIFIED ORGANIZERS ONLY ★ </span>
+</div>
+</div>
+
+<section id="events" style="padding: 80px clamp(16px, 4vw, 56px) 104px">
+<div style="max-width: 1180px; margin: 0 auto">
+<div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: end; justify-content: space-between; margin-bottom: 36px">
+<h2 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(30px, 4vw, 44px); text-transform: uppercase">Upcoming</h2>
+<a href="#events" style="font-weight: 800">All events →</a>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 36px">
+
+<article class="stub" style="background: #F3EDE4; color: #0E0B10; border-radius: 14px; overflow: hidden; position: relative">
+<div style="position: relative; height: 340px; overflow: hidden; background: #0E0B10">
+<img class="pic" src="../public/images/ed-crowd.jpg" alt="Crowd with raised hands under stage lights" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; display: block">
+<span style="position: absolute; left: 16px; top: 16px; background: #FF6A1A; color: #0E0B10; font-family: 'DM Mono', monospace; font-size: 13px; padding: 8px 12px; border-radius: 999px">SAT 14 NOV</span>
+</div>
+<div style="padding: 22px 24px 18px">
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 12px; color: #6B5F55">No. 0101 · GATES OPEN 4PM</p>
+<h3 style="margin: 8px 0 6px; font-family: Unbounded, sans-serif; font-weight: 800; font-size: 28px; text-transform: uppercase">Ed Sheeran</h3>
+<p style="margin: 0; font-size: 15px; color: #4A4038; font-weight: 600">Uhuru Park, Nairobi</p>
+</div>
+<div style="position: relative; border-top: 2px dashed #B9AC9C; margin: 0 16px"><div style="position: absolute; left: -30px; top: -13px; width: 24px; height: 24px; border-radius: 50%; background: #0E0B10"></div><div style="position: absolute; right: -30px; top: -13px; width: 24px; height: 24px; border-radius: 50%; background: #0E0B10"></div></div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 24px 22px">
+<div><p style="margin: 0; font-size: 12px; color: #6B5F55; font-weight: 700">FROM</p><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 20px">KES 4,500</p></div>
+<a href="Checkout.dc.html" class="cta" style="background: #FF6A1A; color: #0E0B10; text-decoration: none; font-weight: 800; padding: 14px 22px; border-radius: 999px">Get tickets</a>
+</div>
+</article>
+
+<article class="stub" style="background: #F3EDE4; color: #0E0B10; border-radius: 14px; overflow: hidden; position: relative">
+<div style="position: relative; height: 340px; overflow: hidden; background: #0E0B10">
+<img class="pic" src="../public/images/cb-spotlight.jpg" alt="Singer in a single spotlight beam" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; display: block">
+<span style="position: absolute; right: 18px; top: 22px; border: 3px solid #FF6A1A; color: #FF6A1A; font-family: Unbounded, sans-serif; font-weight: 800; font-size: 16px; padding: 6px 12px; border-radius: 8px; transform: rotate(-8deg); letter-spacing: 1px">COMING SOON</span>
+</div>
+<div style="padding: 22px 24px 18px">
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 12px; color: #6B5F55">No. 0102 · DATE TO BE ANNOUNCED</p>
+<h3 style="margin: 8px 0 6px; font-family: Unbounded, sans-serif; font-weight: 800; font-size: 28px; text-transform: uppercase">Chris Brown</h3>
+<p style="margin: 0; font-size: 15px; color: #4A4038; font-weight: 600">Talanta Stadium, Nairobi</p>
+</div>
+<div style="position: relative; border-top: 2px dashed #B9AC9C; margin: 0 16px"><div style="position: absolute; left: -30px; top: -13px; width: 24px; height: 24px; border-radius: 50%; background: #0E0B10"></div><div style="position: absolute; right: -30px; top: -13px; width: 24px; height: 24px; border-radius: 50%; background: #0E0B10"></div></div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 24px 22px">
+<div><p style="margin: 0; font-size: 12px; color: #6B5F55; font-weight: 700">TICKETS</p><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 20px">Drop soon</p></div>
+<button type="button" onClick="{{ toggleNotify }}" style="background: {{ notifyBg }}; color: {{ notifyFg }}; border: 2px solid #0E0B10; font: 800 15px Manrope, sans-serif; padding: 12px 20px; border-radius: 999px; cursor: pointer">{{ notifyLabel }}</button>
+</div>
+</article>
+
+</div>
+</div>
+</section>
+
+<section id="organizers" style="background: #4B1D5C; padding: 88px clamp(16px, 4vw, 56px)">
+<div style="max-width: 1180px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 48px; align-items: center">
+<div style="flex: 1 1 380px">
+<p style="margin: 0 0 14px; font-family: 'DM Mono', monospace; font-size: 14px; color: #FFB48A; letter-spacing: 2px">FOR ORGANIZERS</p>
+<h2 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(30px, 4.5vw, 54px); line-height: 1.05; text-transform: uppercase">Sell out<br>your night.</h2>
+<p style="margin: 22px 0 30px; max-width: 440px; font-size: 17px; line-height: 1.6; color: #E4DCD2">List for free, sell through M-Pesa, scan tickets at the gate from your phone. You only pay when you sell.</p>
+<a href="Signup.dc.html" class="cta" style="display: inline-block; background: #FF6A1A; color: #0E0B10; text-decoration: none; font-weight: 800; padding: 16px 26px; border-radius: 999px">Apply as organizer</a>
+</div>
+<div style="flex: 1 1 380px; background: #F3EDE4; color: #0E0B10; border-radius: 14px; padding: 28px; font-size: 15px; box-shadow: 0 24px 48px rgba(0,0,0,.35)">
+<p style="margin: 0 0 16px; font-family: 'DM Mono', monospace; font-size: 12px; color: #6B5F55">PRICING · No. 0000</p>
+<div style="display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 2px dashed #B9AC9C"><span style="font-weight: 700">Listing an event</span><span style="font-family: 'DM Mono', monospace">Free</span></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 2px dashed #B9AC9C"><span style="font-weight: 700">Platform fee</span><span style="font-family: 'DM Mono', monospace">5% per ticket</span></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 2px dashed #B9AC9C"><span style="font-weight: 700">Featured on homepage</span><span style="font-family: 'DM Mono', monospace">KES 2,000 / week</span></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; padding: 12px 0"><span style="font-weight: 700">Payout to M-Pesa</span><span style="font-family: 'DM Mono', monospace">24h after event</span></div>
+</div>
+</div>
+</section>
+
+<footer style="padding: 32px clamp(16px, 4vw, 56px); display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; color: #B8AFA6; font-size: 14px">
+<span style="font-family: Unbounded, sans-serif; font-weight: 800; color: #F3EDE4">PRIME PASS</span>
+<span>Student project demo · sample events, no real tickets sold</span>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":2120}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { tab: 'events', notify: false };
+}
+renderVals() {
+var s = this.state, self = this;
+return {
+evClass: s.tab === 'events' ? 'tab on' : 'tab',
+orgClass: s.tab === 'org' ? 'tab on' : 'tab',
+goEvents: function () { self.setState({ tab: 'events' }); },
+goOrg: function () { self.setState({ tab: 'org' }); },
+notifyLabel: s.notify ? "You'll be notified ✓" : 'Notify me',
+notifyBg: s.notify ? '#0E0B10' : 'transparent',
+notifyFg: s.notify ? '#F3EDE4' : '#0E0B10',
+toggleNotify: function () { self.setState({ notify: !self.state.notify }); }
+};
+}
+}
+</script>
+</body>
+</html>

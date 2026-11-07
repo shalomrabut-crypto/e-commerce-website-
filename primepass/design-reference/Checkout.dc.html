@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Prime Pass checkout</title>
+<script src="./support.js"></script>
+<script src="./ppqr.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&amp;family=Manrope:wght@400;500;700;800&amp;family=DM+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0E0B10}
+a{color:#FF6A1A}a:hover{color:#FF8A47}
+.enter{animation:rise 200ms ease-out both}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.cta:hover{background:#FF8A47 !important}
+.ghost:hover{background:#F3EDE4 !important;color:#0E0B10 !important}
+.pill{transition:left 200ms cubic-bezier(.3,1.4,.5,1)}
+.spin{width:64px;height:64px;border-radius:50%;border:5px solid #2A2230;border-top-color:#FF6A1A;animation:spin 800ms linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ticketIn{animation:ticketIn 260ms ease-out both}
+@keyframes ticketIn{from{opacity:0;transform:scale(1.1) rotate(-3deg)}to{opacity:1;transform:none}}
+.stamp{animation:thud 340ms cubic-bezier(.3,1.6,.5,1) 160ms both}
+@keyframes thud{0%{opacity:0;transform:scale(2.4) rotate(-14deg)}100%{opacity:1;transform:scale(1) rotate(-14deg)}}
+.face{transition:transform 320ms cubic-bezier(.2,.9,.3,1.3)}
+.face.torn{transform:translateY(-10px) rotate(-3deg)}
+.qr{max-height:0;opacity:0;overflow:hidden;transition:max-height 320ms ease-out,opacity 200ms ease-out 100ms}
+.qr.open{max-height:320px;opacity:1}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
+</style>
+</helmet>
+<div style="width: 960px; height: 800px; box-sizing: border-box; padding: 40px 48px; background: #0E0B10; color: #F3EDE4; font-family: Manrope, sans-serif; display: flex; flex-direction: column; gap: 28px">
+
+<div style="display: flex; align-items: center; justify-content: space-between">
+<div>
+<a href="Main.dc.html" style="font-weight: 800; text-decoration: none">← Events</a>
+<h1 style="margin: 8px 0 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: 34px; text-transform: uppercase">Checkout</h1>
+</div>
+<span style="font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 1px; border: 1.5px dashed #FFB48A; color: #FFB48A; padding: 8px 14px; border-radius: 999px">DEMO MODE · NO REAL CHARGES</span>
+</div>
+
+<div style="display: flex; gap: 32px; flex: 1; min-height: 0">
+
+<aside style="flex: 0 0 300px; background: #F3EDE4; color: #0E0B10; border-radius: 14px; overflow: hidden; align-self: flex-start">
+<img src="../public/images/ed-crowd.jpg" alt="" style="width: 100%; height: 130px; object-fit: cover; object-position: 50% 60%; display: block">
+<div style="padding: 22px 24px; display: flex; flex-direction: column; gap: 12px">
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 12px; color: #6B5F55">No. 0101 · SAT 14 NOV · 4PM</p>
+<h2 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: 24px; text-transform: uppercase; line-height: 1.05">Ed Sheeran</h2>
+<p style="margin: 0; font-size: 14px; font-weight: 600; color: #4A4038">Uhuru Park, Nairobi</p>
+<div style="border-top: 2px dashed #B9AC9C; margin: 4px 0"></div>
+<div style="display: flex; justify-content: space-between; font-size: 15px"><span>Regular × 1</span><span style="font-family: 'DM Mono', monospace">4,500</span></div>
+<div style="display: flex; justify-content: space-between; font-size: 15px; color: #4A4038"><span>Service fee</span><span style="font-family: 'DM Mono', monospace">150</span></div>
+<div style="border-top: 2px dashed #B9AC9C; margin: 4px 0"></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-weight: 800">Total</span><span style="font-family: 'DM Mono', monospace; font-size: 22px">KES 4,650</span></div>
+</div>
+</aside>
+
+<section style="flex: 1; background: #17121A; border: 1px solid #2A2230; border-radius: 14px; padding: 32px; box-sizing: border-box; position: relative; overflow: hidden">
+
+<sc-if value="{{ isPay }}" hint-placeholder-val="{{ true }}">
+<div class="enter" style="display: flex; flex-direction: column; gap: 22px">
+<h3 style="margin: 0; font-size: 20px; font-weight: 800">How do you want to pay?</h3>
+<div style="position: relative; display: flex; background: #0E0B10; border: 1px solid #2A2230; border-radius: 999px; padding: 4px; width: 320px">
+<div class="pill" style="position: absolute; top: 4px; bottom: 4px; width: 156px; left: {{ pillLeft }}; background: #FF6A1A; border-radius: 999px"></div>
+<button type="button" onClick="{{ pickMpesa }}" aria-pressed="{{ isMpesa }}" style="position: relative; flex: 1; height: 44px; border: 0; background: transparent; color: {{ mpesaColor }}; font: 800 15px Manrope, sans-serif; cursor: pointer">M-Pesa</button>
+<button type="button" onClick="{{ pickCard }}" aria-pressed="{{ isCard }}" style="position: relative; flex: 1; height: 44px; border: 0; background: transparent; color: {{ cardColor }}; font: 800 15px Manrope, sans-serif; cursor: pointer">Card</button>
+</div>
+<sc-if value="{{ isMpesa }}" hint-placeholder-val="{{ true }}">
+<div class="enter" style="display: flex; flex-direction: column; gap: 8px; max-width: 360px">
+<label for="phone" style="font-size: 14px; font-weight: 800">M-Pesa phone number</label>
+<input id="phone" type="tel" placeholder="+254 7XX XXX XXX" style="height: 52px; padding: 0 18px; border-radius: 12px; border: 1.5px solid #3A3040; background: #0E0B10; color: #F3EDE4; font: 500 17px 'DM Mono', monospace; outline-color: #FF6A1A">
+<p style="margin: 0; font-size: 13px; color: #B8AFA6">You'll get a prompt on this phone to enter your PIN.</p>
+</div>
+</sc-if>
+<sc-if value="{{ isCard }}" hint-placeholder-val="{{ false }}">
+<div class="enter" style="display: flex; flex-direction: column; gap: 8px; max-width: 360px">
+<label for="card" style="font-size: 14px; font-weight: 800">Test card (demo only)</label>
+<input id="card" value="4242 4242 4242 4242" readonly style="height: 52px; padding: 0 18px; border-radius: 12px; border: 1.5px solid #3A3040; background: #0E0B10; color: #B8AFA6; font: 500 17px 'DM Mono', monospace">
+<p style="margin: 0; font-size: 13px; color: #B8AFA6">Real card numbers are never collected in demo mode.</p>
+</div>
+</sc-if>
+<button type="button" class="cta" onClick="{{ pay }}" style="align-self: flex-start; height: 56px; padding: 0 32px; border: 0; border-radius: 999px; background: #FF6A1A; color: #0E0B10; font: 800 17px Manrope, sans-serif; cursor: pointer">Pay KES 4,650</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ isWaiting }}" hint-placeholder-val="{{ false }}">
+<div class="enter" style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; text-align: center">
+<div class="spin" role="img" aria-label="Waiting for payment"></div>
+<h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: 26px; text-transform: uppercase">{{ waitTitle }}</h3>
+<p style="margin: 0; max-width: 340px; color: #D6CEC4; line-height: 1.55">{{ waitBody }}</p>
+</div>
+</sc-if>
+
+<sc-if value="{{ isPaid }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; gap: 30px; align-items: flex-start">
+<button type="button" onClick="{{ tear }}" aria-label="Open ticket to show QR code" class="ticketIn" style="all: unset; cursor: pointer; width: 264px; display: block">
+<div class="{{ faceClass }}" style="background: #F3EDE4; color: #0E0B10; border-radius: 14px 14px 0 0; padding: 22px; position: relative">
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 12px; color: #6B5F55">ADMIT ONE · {{ ticketId }}</p>
+<p style="margin: 10px 0 4px; font-family: Unbounded, sans-serif; font-weight: 800; font-size: 22px; line-height: 1.05; text-transform: uppercase">Ed Sheeran</p>
+<p style="margin: 0; font-size: 13px; font-weight: 600; color: #4A4038">Sat 14 Nov · Uhuru Park · Regular</p>
+<div class="stamp" style="position: absolute; right: 12px; top: 40px; border: 4px solid #FF6A1A; color: #FF6A1A; font-family: Unbounded, sans-serif; font-weight: 800; font-size: 24px; padding: 2px 12px; border-radius: 8px; letter-spacing: 2px; background: rgba(243,237,228,0.7)">PAID</div>
+<div style="position: absolute; left: 10px; right: 10px; bottom: -1px; border-bottom: 2px dashed #B9AC9C"></div>
+</div>
+<div class="{{ qrClass }}" style="background: #F3EDE4">
+<div style="padding: 18px; display: flex; flex-direction: column; align-items: center; gap: 8px">
+<div role="img" aria-label="Ticket QR code" style="display: grid; grid-template-columns: {{ qrCols }}; background: #FFFFFF; padding: 10px; border-radius: 8px">
+<sc-for list="{{ cells }}" as="c" hint-placeholder-count="841"><div style="width: 6px; height: 6px; background: {{ c.bg }}"></div></sc-for>
+</div>
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 11px; color: #4A4038">Show this at the gate</p>
+</div>
+</div>
+<div style="height: 14px; background: #F3EDE4; border-radius: 0 0 14px 14px"></div>
+</button>
+<div class="enter" style="display: flex; flex-direction: column; gap: 14px; padding-top: 6px">
+<h3 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 800; font-size: 30px; text-transform: uppercase; line-height: 1">You're in.</h3>
+<p style="margin: 0; max-width: 270px; color: #D6CEC4; line-height: 1.55">{{ paidHint }}</p>
+<a href="Ticket.dc.html" class="cta" style="align-self: flex-start; background: #FF6A1A; color: #0E0B10; text-decoration: none; font-weight: 800; padding: 13px 20px; border-radius: 999px">Printable ticket</a>
+<button type="button" class="ghost" onClick="{{ reset }}" style="align-self: flex-start; height: 44px; padding: 0 18px; border: 1.5px solid #F3EDE4; border-radius: 999px; background: transparent; color: #F3EDE4; font: 800 14px Manrope, sans-serif; cursor: pointer">Replay demo</button>
+</div>
+</div>
+</sc-if>
+
+</section>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":960,"height":800}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { step: 'pay', method: 'mpesa', torn: false, id: this.newId() };
+}
+newId() {
+var a = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789', s = '';
+for (var i = 0; i < 6; i++) s += a.charAt(Math.floor(Math.random() * a.length));
+return 'PP-' + s;
+}
+componentWillUnmount() { clearTimeout(this.t); }
+grid(text) {
+if (this._key === text && this._grid) return this._grid;
+if (typeof window.PPQR !== 'function') return { n: 29, cells: [] };
+var g = window.PPQR(text), cells = [];
+for (var r = 0; r < g.length; r++) for (var c = 0; c < g.length; c++) cells.push({ bg: g[r][c] ? '#0E0B10' : '#FFFFFF' });
+this._key = text; this._grid = { n: g.length, cells: cells };
+return this._grid;
+}
+renderVals() {
+var s = this.state, self = this, mpesa = s.method === 'mpesa';
+var g = s.step === 'paid' ? this.grid('PRIMEPASS|' + s.id + '|EVT-0101|REGULAR') : { n: 29, cells: [] };
+return {
+isPay: s.step === 'pay',
+isWaiting: s.step === 'waiting',
+isPaid: s.step === 'paid',
+isMpesa: mpesa,
+isCard: !mpesa,
+pillLeft: mpesa ? '4px' : '160px',
+mpesaColor: mpesa ? '#0E0B10' : '#F3EDE4',
+cardColor: mpesa ? '#F3EDE4' : '#0E0B10',
+waitTitle: mpesa ? 'Check your phone' : 'Confirming payment',
+waitBody: mpesa ? 'Enter your M-Pesa PIN to approve KES 4,650 to Prime Pass. This screen updates on its own.' : 'Talking to the card network. This takes a few seconds.',
+ticketId: s.id,
+faceClass: s.torn ? 'face torn' : 'face',
+qrClass: s.torn ? 'qr open' : 'qr',
+paidHint: s.torn ? 'Saved under My Tickets. The QR works offline at the gate.' : 'Tap the ticket to tear it open and see your QR code.',
+cells: g.cells,
+qrCols: 'repeat(' + g.n + ', 6px)',
+pickMpesa: function () { self.setState({ method: 'mpesa' }); },
+pickCard: function () { self.setState({ method: 'card' }); },
+pay: function () {
+self.setState({ step: 'waiting' });
+clearTimeout(self.t);
+self.t = setTimeout(function () { self.setState({ step: 'paid', torn: false, id: self.newId() }); }, 2600);
+},
+tear: function () { self.setState({ torn: !self.state.torn }); },
+reset: function () { clearTimeout(self.t); self.setState({ step: 'pay', torn: false }); }
+};
+}
+}
+</script>
+</body>
+</html>
