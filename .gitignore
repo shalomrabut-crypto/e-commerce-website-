@@ -3,3 +3,8 @@
 node_modules/
 .next/
 .env*
+
+.venv/
+node_modules/
+.next/
+.env*
